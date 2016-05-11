@@ -21,6 +21,7 @@ dependencies:
   - bytestring-trie
   - tabular
   - data-stringmap
+  - list-tries
 
 library:
   source-dirs: src

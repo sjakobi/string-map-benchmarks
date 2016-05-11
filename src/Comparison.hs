@@ -12,6 +12,9 @@ import qualified Data.ByteString.Lazy as LazyByteString
 import qualified Data.ByteString.Char8 as BSChar8
 import           Data.Int
 import           Data.List
+import           Data.ListTrie.Base.Map (AList, WrappedIntMap)
+import qualified Data.ListTrie.Map as ListTrie
+import qualified Data.ListTrie.Patricia.Map as Patricia
 import qualified Data.Map as Map
 import qualified Data.Map.StringMap as TernaryStringMap
 import qualified Data.Map.TernaryMap as TernaryMap
@@ -52,9 +55,36 @@ run = do
             "data-stringmap"
             "StringMap ()"
             (encodedSize (StringMap.fromList mapping))
-        ]
+        , Result
+            "list-tries"
+            "ListTrieMap WrappedIntMap String ()"
+            (encodedSize
+              (ListTrie.fromList mapping :: ListTrie.TrieMap WrappedIntMap Char ()))
+        , Result
+            "list-tries"
+            "ListTrieMap AList String ()"
+            (encodedSize
+              (ListTrie.fromList mapping :: ListTrie.TrieMap AList Char ()))
+        , Result
+            "list-tries"
+            "ListTrieMap Map String ()"
+            (encodedSize
+              (ListTrie.fromList mapping :: ListTrie.TrieMap Map.Map Char ()))
+        , Result
+            "list-tries"
+            "PatriciaTrieMap WrappedIntMap String ()"
+            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap WrappedIntMap Char ()))
+        , Result
+            "list-tries"
+            "PatriciaTrieMap AList String ()"
+            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap AList Char ()))
+        , Result
+            "list-tries"
+            "PatriciaTrieMap Map String ()"
+            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap Map.Map Char ()))
 
-      table = tabulateResults (sortOn resultContent results)
+        ]
+      table = tabulateResults (sortOn (\(Result p t c) -> (c, t, p)) results)
 
   outputTable table
 
