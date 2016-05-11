@@ -22,6 +22,7 @@ dependencies:
   - tabular
   - data-stringmap
   - list-tries
+  - cereal
 
 library:
   source-dirs: src
