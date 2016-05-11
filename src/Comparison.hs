@@ -31,27 +31,27 @@ run = do
         [ Result
             "base"
             "[(String, ())]"
-            (packedSize mapping)
+            (encodedSize mapping)
         , Result
             "TernaryTrees"
             "StringMap ()"
-            (packedSize (TernaryStringMap.fromList mapping))
+            (encodedSize (TernaryStringMap.fromList mapping))
         , Result
             "TernaryTrees"
             "TernaryMap [Word8] ()"
-            (packedSize (TernaryMap.fromList (map (first ByteString.unpack) bsMapping)))
+            (encodedSize (TernaryMap.fromList (map (first ByteString.unpack) bsMapping)))
         , Result
             "containers"
             "Map String ()"
-            (packedSize (Map.fromList mapping))
+            (encodedSize (Map.fromList mapping))
         , Result
             "bytestring-trie"
             "Trie ()"
-            (packedSize (BSTrie.fromList bsMapping))
+            (encodedSize (BSTrie.fromList bsMapping))
         , Result
             "data-stringmap"
             "StringMap ()"
-            (packedSize (StringMap.fromList mapping))
+            (encodedSize (StringMap.fromList mapping))
         ]
 
       table = tabulateResults (sortOn resultContent results)
@@ -67,8 +67,8 @@ data Result a = Result
   , resultContent :: a
   } deriving (Show, Eq, Ord, Functor)
 
-packedSize :: Binary.Binary a => a -> Int64
-packedSize = LazyByteString.length . Binary.encode
+encodedSize :: Binary.Binary a => a -> Int64
+encodedSize = LazyByteString.length . Binary.encode
 
 tabulateResults :: Show a => [Result a] -> Table String String String
 tabulateResults results =
