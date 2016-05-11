@@ -11,6 +11,7 @@ import qualified Data.ByteString as ByteString
 import qualified Data.ByteString.Lazy as LazyByteString
 import qualified Data.ByteString.Char8 as BSChar8
 import           Data.Int
+import           Data.List
 import qualified Data.Map as Map
 import qualified Data.Map.StringMap as StringMap
 import qualified Data.Map.TernaryMap as TernaryMap
@@ -48,7 +49,7 @@ run = do
             (packedSize (BSTrie.fromList bsMapping))
         ]
 
-      table = tabulateResults results
+      table = tabulateResults (sortOn resultContent results)
 
   outputTable table
 
@@ -67,6 +68,6 @@ packedSize = LazyByteString.length . Binary.encode
 tabulateResults :: Show a => [Result a] -> Table String String String
 tabulateResults results =
   Table
-    (Group NoLine (map (Header . resultType) results))
-    (Group SingleLine [Header "Package", Header "Size in Bytes"])
-    (map (\r -> [resultPackage r, show (resultContent r)]) results)
+    (Group NoLine (map (Header . show) [1 .. length results]))
+    (Group SingleLine (map Header ["Type", "Package", "Size in Bytes"]))
+    (map (\(Result p t c) -> [t, p, show c]) results)
