@@ -73,15 +73,15 @@ run = do
         , Result
             "list-tries"
             "PatriciaTrieMap WrappedIntMap String ()"
-            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap WrappedIntMap Char ()))
+            (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap WrappedIntMap Char ()))
         , Result
             "list-tries"
             "PatriciaTrieMap AList String ()"
-            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap AList Char ()))
+            (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap AList Char ()))
         , Result
             "list-tries"
             "PatriciaTrieMap Map String ()"
-            (encodedSize ((Patricia.fromList mapping) :: Patricia.TrieMap Map.Map Char ()))
+            (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap Map.Map Char ()))
 
         ]
       table = tabulateResults (sortOn (\(Result p t c) -> (c, t, p)) results)
