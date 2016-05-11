@@ -6,6 +6,6 @@ The maps are serialized using [`encode` from the `binary` library](http://haddoc
 
 ## Runing the benchmark
 
-```haskell
+```bash
 stack build --exec string-map-binary-comparison
 ```
