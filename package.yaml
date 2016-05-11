@@ -1,0 +1,34 @@
+name:                string-map-binary-comparison
+version:             0.1.0.0
+synopsis:            Simple project template from stack
+description:         Please see README.md
+homepage:            https://github.com/sjakobi/string-map-binary-comparison#readme
+license:             BSD3
+author:              Simon Jakobi
+maintainer:          simon.jakobi@gmail.com
+copyright:           BSD3
+category:            Web
+
+ghc-options: -Wall
+
+dependencies:
+  - base >= 4.7 && < 5
+  - binary
+  - TernaryTrees
+  - containers
+  - strict
+  - bytestring
+  - bytestring-trie
+  - tabular
+
+library:
+  source-dirs: src
+  exposed-modules:
+    - Comparison
+
+executables:
+  string-map-binary-comparison:
+    source-dirs:      app
+    main:             Main.hs
+    dependencies:
+      - string-map-binary-comparison
