@@ -13,8 +13,9 @@ import qualified Data.ByteString.Char8 as BSChar8
 import           Data.Int
 import           Data.List
 import qualified Data.Map as Map
-import qualified Data.Map.StringMap as StringMap
+import qualified Data.Map.StringMap as TernaryStringMap
 import qualified Data.Map.TernaryMap as TernaryMap
+import qualified Data.StringMap.Strict as StringMap
 import qualified Data.Trie as BSTrie
 import qualified System.IO.Strict as StrictIO
 import           Text.Tabular (Table(..), Properties(..), Header(..))
@@ -34,7 +35,7 @@ run = do
         , Result
             "TernaryTrees"
             "StringMap ()"
-            (packedSize (StringMap.fromList mapping))
+            (packedSize (TernaryStringMap.fromList mapping))
         , Result
             "TernaryTrees"
             "TernaryMap [Word8] ()"
@@ -47,6 +48,10 @@ run = do
             "bytestring-trie"
             "Trie ()"
             (packedSize (BSTrie.fromList bsMapping))
+        , Result
+            "data-stringmap"
+            "StringMap ()"
+            (packedSize (StringMap.fromList mapping))
         ]
 
       table = tabulateResults (sortOn resultContent results)
