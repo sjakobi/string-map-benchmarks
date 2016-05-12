@@ -10,6 +10,7 @@ import qualified Data.Binary as Binary
 import qualified Data.ByteString as ByteString
 import qualified Data.ByteString.Lazy as LazyByteString
 import qualified Data.ByteString.Char8 as BSChar8
+import qualified Data.DAWG.Static as StaticDAWG
 import           Data.Int
 import           Data.List
 import           Data.ListTrie.Base.Map (AList, WrappedIntMap)
@@ -65,37 +66,47 @@ run = do
             (encodedSize (StringMap.fromList mapping))
         , Result
             "list-tries"
-            "ListTrieMap WrappedIntMap String ()"
+            "ListTrieMap WrappedIntMap Char ()"
             "binary"
             (encodedSize
               (ListTrie.fromList mapping :: ListTrie.TrieMap WrappedIntMap Char ()))
         , Result
             "list-tries"
-            "ListTrieMap AList String ()"
+            "ListTrieMap AList Char ()"
             "binary"
             (encodedSize
               (ListTrie.fromList mapping :: ListTrie.TrieMap AList Char ()))
         , Result
             "list-tries"
-            "ListTrieMap Map String ()"
+            "ListTrieMap Map Char ()"
             "binary"
             (encodedSize
               (ListTrie.fromList mapping :: ListTrie.TrieMap Map.Map Char ()))
         , Result
             "list-tries"
-            "PatriciaTrieMap WrappedIntMap String ()"
+            "PatriciaTrieMap WrappedIntMap Char ()"
             "binary"
             (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap WrappedIntMap Char ()))
         , Result
             "list-tries"
-            "PatriciaTrieMap AList String ()"
+            "PatriciaTrieMap AList Char ()"
             "binary"
             (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap AList Char ()))
         , Result
             "list-tries"
-            "PatriciaTrieMap Map String ()"
+            "PatriciaTrieMap Map Char ()"
             "binary"
             (encodedSize (Patricia.fromList mapping :: Patricia.TrieMap Map.Map Char ()))
+        , Result
+            "dawg"
+            "DAWG Char () ()"
+            "binary"
+            (encodedSize (StaticDAWG.fromLang pkgs))
+        , Result
+            "dawg"
+            "DAWG Word8 () ()"
+            "binary"
+            (encodedSize (StaticDAWG.fromList (map (first ByteString.unpack) bsMapping)))
 
           -- cereal
         , Result

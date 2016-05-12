@@ -13,22 +13,24 @@ stack build --exec string-map-binary-comparison
 ## Results
 
 ```
-+----++-----------------------------------------+-----------------+-----------------------+---------------+
-|    ||                                    Type |         Package | Serialization Library | Size in Bytes |
-+====++=========================================+=================+=======================+===============+
-|  1 ||                            StringMap () |    TernaryTrees |                binary |        123858 |
-|  2 ||                   TernaryMap [Word8] () |    TernaryTrees |                binary |        123858 |
-|  3 ||                            StringMap () |  data-stringmap |                binary |        147083 |
-|  4 ||                           Map String () |      containers |                binary |        185083 |
-|  5 ||                          [(String, ())] |            base |                binary |        185083 |
-|  6 ||                           Map String () |      containers |                cereal |        185083 |
-|  7 ||                          [(String, ())] |            base |                cereal |        185083 |
-|  8 ||                                 Trie () | bytestring-trie |                binary |        220212 |
-|  9 ||         PatriciaTrieMap AList String () |      list-tries |                binary |        277307 |
-| 10 ||           PatriciaTrieMap Map String () |      list-tries |                binary |        277307 |
-| 11 || PatriciaTrieMap WrappedIntMap String () |      list-tries |                binary |        277307 |
-| 12 ||             ListTrieMap AList String () |      list-tries |                binary |        570899 |
-| 13 ||               ListTrieMap Map String () |      list-tries |                binary |        570899 |
-| 14 ||     ListTrieMap WrappedIntMap String () |      list-tries |                binary |        570899 |
-+----++-----------------------------------------+-----------------+-----------------------+---------------+
++----++---------------------------------------+-----------------+-----------------------+---------------+
+|    ||                                  Type |         Package | Serialization Library | Size in Bytes |
++====++=======================================+=================+=======================+===============+
+|  1 ||                          StringMap () |    TernaryTrees |                binary |        123858 |
+|  2 ||                 TernaryMap [Word8] () |    TernaryTrees |                binary |        123858 |
+|  3 ||                          StringMap () |  data-stringmap |                binary |        147083 |
+|  4 ||                         Map String () |      containers |                binary |        185083 |
+|  5 ||                        [(String, ())] |            base |                binary |        185083 |
+|  6 ||                         Map String () |      containers |                cereal |        185083 |
+|  7 ||                        [(String, ())] |            base |                cereal |        185083 |
+|  8 ||                               Trie () | bytestring-trie |                binary |        220212 |
+|  9 ||         PatriciaTrieMap AList Char () |      list-tries |                binary |        277307 |
+| 10 ||           PatriciaTrieMap Map Char () |      list-tries |                binary |        277307 |
+| 11 || PatriciaTrieMap WrappedIntMap Char () |      list-tries |                binary |        277307 |
+| 12 ||             ListTrieMap AList Char () |      list-tries |                binary |        570899 |
+| 13 ||               ListTrieMap Map Char () |      list-tries |                binary |        570899 |
+| 14 ||     ListTrieMap WrappedIntMap Char () |      list-tries |                binary |        570899 |
+| 15 ||                       DAWG Char () () |            dawg |                binary |       1166018 |
+| 16 ||                      DAWG Word8 () () |            dawg |                binary |       1166018 |
++----++---------------------------------------+-----------------+-----------------------+---------------+
 ```

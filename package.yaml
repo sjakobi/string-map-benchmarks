@@ -23,6 +23,7 @@ dependencies:
   - data-stringmap
   - list-tries
   - cereal
+  - dawg
 
 library:
   source-dirs: src
